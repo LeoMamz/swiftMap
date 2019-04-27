@@ -33,8 +33,17 @@ import MapKit
 
 class ViewController: UIViewController {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    @IBOutlet weak var mapView: MKMapView!
+    let regionRadius: CLLocationDistance = 1000
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                  regionRadius, regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let initialLocation = CLLocation(latitude: 30.26126, longitude: 120.12607)
+        centerMapOnLocation(location: initialLocation)
   }
 
 }
